@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="fluentresults" Version="3.15.2" />
+    <PackageReference Include="Mediatr" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Serdiuk.Booking.Domain\Serdiuk.Booking.Domain.csproj" />
+    <ProjectReference Include="..\Serdiuk.Booking.Infrastructure\Serdiuk.Booking.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Orders\" />
+  </ItemGroup>
+
+</Project>
