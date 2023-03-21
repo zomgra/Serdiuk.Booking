@@ -10,14 +10,13 @@ namespace Serdiuk.Booking.Domain
         public Order(Guid userId, int numberId, decimal numberCost, DateTime dateStart, DateTime dateEnd)
         {
             if (dateEnd <= dateStart)
-                 throw new ArgumentException("Дата выезда не может быть меньше даты заезда");
+                throw new ArgumentException("Дата выезда не может быть меньше даты заезда");
 
             UserId = userId;
             NumberId = numberId;
             NumberCost = numberCost;
             DateStart = dateStart;
             DateEnd = dateEnd;
-            Status = OrderStatus.Open;
         }
         /// <summary>
         /// Идентификатор заказа
@@ -32,9 +31,32 @@ namespace Serdiuk.Booking.Domain
         /// </summary>
         public Guid UserId { get; init; }
         /// <summary>
+        /// Флаг, заказан ли номер в отеле
+        /// </summary>
+        public bool IsPayed { get; private set; }
+        /// <summary>
+        /// Флаг, закрыт ли заказ
+        /// </summary>
+        public bool IsClosed { get; private set; }
+        /// <summary>
         /// Статус заказа
         /// </summary>
-        public OrderStatus Status { get; private set; }
+        public OrderStatus Status
+        {
+            get
+            {
+                if (DateTime.UtcNow > DateStart || IsClosed)
+                    return OrderStatus.Closed;
+
+                if (IsPayed)
+                    return OrderStatus.Payed;
+
+                if (DateTime.UtcNow > DateEnd)
+                    return OrderStatus.Ended;
+
+                return OrderStatus.Open;
+            }
+        }
         /// <summary>
         /// Цена номера
         /// </summary>
@@ -50,7 +72,7 @@ namespace Serdiuk.Booking.Domain
         /// <summary>
         /// Количество дней, проведенных в номере
         /// </summary>
-        public TimeSpan DayCount 
+        public TimeSpan DayCount
         {
             get
             {
@@ -60,20 +82,35 @@ namespace Serdiuk.Booking.Domain
         /// <summary>
         /// Общая сума заказа
         /// </summary>
-        public decimal CostOrder 
+        public decimal CostOrder
         {
-            get 
+            get
             {
                 return NumberCost * (decimal)DayCount.TotalDays;
             }
         }
-
+        /// <summary>
+        /// Оплатить заказ
+        /// </summary>
         public Result PayOrder()
         {
             if (Status != OrderStatus.Open)
                 return Result.Fail("Произошла ошибка, попробуйте позже");
-            
-            Status = OrderStatus.Payed;
+
+            IsPayed = true;
+
+            return Result.Ok();
+        }
+        /// <summary>
+        /// Закрыть заказ
+        /// </summary>
+        /// <returns>Если заказ оплачен, отменен или закончен - вернет Fail</returns>
+        public Result TryCloseOrder()
+        {
+            if (Status != OrderStatus.Open)
+                return Result.Fail("Не возможно закрыть заказ, или произошла ошибка");
+
+            IsClosed = true;
             return Result.Ok();
         }
     }

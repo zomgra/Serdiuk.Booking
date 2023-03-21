@@ -12,6 +12,14 @@
         /// <summary>
         /// Оплачен
         /// </summary>
-        Payed = 1
+        Payed = 1,
+        /// <summary>
+        /// Заказавший уже выехал с номера
+        /// </summary>
+        Ended = 2,
+        /// <summary>
+        /// Заказ отменен
+        /// </summary>
+        Closed = 3,
     }
 }

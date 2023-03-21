@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Serdiuk.Booking.Infrastructure\Serdiuk.Booking.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Orders\" />
-  </ItemGroup>
-
 </Project>
