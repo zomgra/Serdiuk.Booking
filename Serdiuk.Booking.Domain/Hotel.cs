@@ -42,8 +42,10 @@
         {
             get
             {
+
                 return AvailableRooms > 0;
             }
+
         }
         /// <summary>
         /// Номера отеля
@@ -69,7 +71,7 @@
             Street = street;
             Image = image;
             NumbersCount = numbersCount;
-           // HotelNumbers = hotelNumbers;
+            // HotelNumbers = hotelNumbers;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Serdiuk.Booking.Application.Hotels.GetAll;
+using Serdiuk.Booking.Application.Hotels.GetByFilter;
 
 namespace Serdiuk.Booking.Api.Controllers
 {
@@ -9,22 +10,30 @@ namespace Serdiuk.Booking.Api.Controllers
     /// </summary>
     [ApiController]
     [Route("api/v1/hotel")]
-    public class HotelController : ControllerBase
+    public class HotelController : BaseControllerApi
     {
-        private readonly IMediator _mediator;
-
-        public HotelController(IMediator mediator)
+        /// <summary>
+        /// Получить все отели за фильтрацией
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetHotelsByFilerAsync([FromQuery]GetHotelsByFilterQuery query, CancellationToken cancellationToken)
         {
-            _mediator = mediator;
+            var result = await Mediator.Send(query, cancellationToken);
+            if (result.IsFailed)
+                return BadRequest(result.Reasons);
+
+            return Ok(result.Value);
         }
         /// <summary>
         /// Получить все отели
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IActionResult> GetAllHotels()
         {
-            var result = await _mediator.Send(new GetAllHotelQuery());
+            var result = await Mediator.Send(new GetAllHotelQuery());
             if (result.IsFailed)
                 return BadRequest(result.Reasons);
 

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serdiuk.Booking.Api.Controllers.Dtos.Number;
 using Serdiuk.Booking.Application.Numbers.BookingNumber;
@@ -11,6 +12,7 @@ namespace Serdiuk.Booking.Api.Controllers
     /// Контроллер по работе с номерами отеля
     /// </summary>
     [ApiController]
+    [Authorize]
     [Route("api/v1/hotel/numbers")]
     public class NumberController : BaseControllerApi
     {
@@ -31,7 +33,6 @@ namespace Serdiuk.Booking.Api.Controllers
         /// <summary>
         /// Заказать номер
         /// </summary>
-        /// <param name="command"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Заказ, который вы создали</returns>
         [HttpPost]
@@ -45,6 +46,11 @@ namespace Serdiuk.Booking.Api.Controllers
 
             return Ok(result.Value);
         }
+        /// <summary>
+        /// Оплатить заказ номера
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="cancellationToken"></param>
         [HttpPut]
         public async Task<IActionResult> PayForNumber([FromQuery] PayNumberCommandDto dto, CancellationToken cancellationToken)
         {

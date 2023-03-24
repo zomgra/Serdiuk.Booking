@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Serdiuk.Booking.Api.Controllers.Dtos.Order;
 using Serdiuk.Booking.Application.Orders.CancelOrder;
 
@@ -6,6 +7,7 @@ namespace Serdiuk.Booking.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/hotel/orders")]
+    [Authorize]
     public class OrderController : BaseControllerApi
     {
         [HttpPut]
