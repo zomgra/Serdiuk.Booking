@@ -15,16 +15,16 @@ namespace Serdiuk.Booking.Application.Hotels.GetByFilter
         /// Минимальная цена номера
         /// </summary>
         [JsonPropertyName("minCost")]
-        public int MinCost { get; set; }
+        public int? MinCost { get; set; }
         /// <summary>
         /// Максимальная цена номера
         /// </summary>
         [JsonPropertyName("maxCost")]
-        public int MaxCost { get; set; }
+        public int? MaxCost { get; set; }
         /// <summary>
         /// Тип номера
         /// </summary>
         [JsonPropertyName("type")]
-        public NumberType NumberType { get; set; }
+        public NumberType? NumberType { get; set; }
     }
 }

@@ -3,6 +3,8 @@ using AutoMapper.QueryableExtensions;
 using FluentResults;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Serdiuk.Booking.Application.Common.Extension;
+using Serdiuk.Booking.Domain;
 using Serdiuk.Booking.Domain.Dto;
 using Serdiuk.Booking.Infrastructure.Interfaces;
 
@@ -24,23 +26,16 @@ namespace Serdiuk.Booking.Application.Hotels.GetByFilter
         {
             var hotels = _context.Hotels.AsNoTracking().Include(g => g.HotelNumbers);
 
-            if (request.MaxCost == 0 && request.MinCost == 0)
+            if (!request.MaxCost.HasValue && !request.MinCost.HasValue)
             {
-                //var results = await hotels.ProjectTo<HotelInfoDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
                 var results = _mapper.Map<List<HotelInfoDto>>(hotels);
                 return results.ToResult<IEnumerable<HotelInfoDto>>();
             }
+            var entities = hotels.FilterBy(_mapper, request.NumberType, request.MinCost, request.MaxCost);
 
-            var entities = hotels.ToList()
-             .Where(hotel => hotel.CanOrderNumber &&
-                    hotel.HotelNumbers.Any(number =>
-                        number.NumberCost >= request.MinCost &&
-                        number.NumberCost <= request.MaxCost &&
-                        number.IsAvailable &&
-                        number.Type == request.NumberType));
 
-            //  var result = await entities.ProjectTo<HotelInfoDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
-            var result = _mapper.Map<List<HotelInfoDto>>(entities);
+
+            var result = entities.ProjectTo<HotelInfoDto>(_mapper.ConfigurationProvider);
 
             return result.ToResult<IEnumerable<HotelInfoDto>>();
         }

@@ -10,12 +10,12 @@ namespace Serdiuk.Booking.Infrastructure.Persistance
 
             var numbers = new List<HotelNumber>()
                 {
-                    new HotelNumber("Lux-1", "https://panoramacity.ru/wp-content/uploads/2020/07/3V9A6982.jpg", NumberType.Lux, 2000),
+                    new HotelNumber("Lux-1", "https://panoramacity.ru/wp-content/uploads/2020/07/3V9A6982.jpg", NumberType.Lux, 550),
                     new HotelNumber("Econom-1", "https://www.palladaran.ru/uploads/images/ekonom-nomer.jpg", NumberType.Econom, 200),
                     new HotelNumber("Econom-2", "https://cronhotel.ru/images/page-rooms/econom/modal/econom-1.jpg", NumberType.Econom, 220),
-                    new HotelNumber("Lux-2", "https://vedenskyhotel.ru/wp-content/uploads/2017/11/00006standart_room_vedensky-2.jpg", NumberType.Lux, 1900),
-                    new HotelNumber("LuxPlus-1", "https://kidpassage.com/images/publications/images/1265_room-type-3.jpg", NumberType.LuxPlus, 2200),
-                    new HotelNumber("Econom-3", "https://hotel-tourist.kiev.ua/ru/assets/photo/rooms/economy-single-room/tourist-hotel-economy-single%20(2).jpg", NumberType.Econom, 300),
+                    new HotelNumber("Lux-2", "https://vedenskyhotel.ru/wp-content/uploads/2017/11/00006standart_room_vedensky-2.jpg", NumberType.Lux, 500),
+                    new HotelNumber("LuxPlus-1", "https://kidpassage.com/images/publications/images/1265_room-type-3.jpg", NumberType.LuxPlus, 990),
+                    new HotelNumber("Econom-3", "https://hotel-tourist.kiev.ua/ru/assets/photo/rooms/economy-single-room/tourist-hotel-economy-single%20(2).jpg", NumberType.Econom, 100),
                 };
             var hotels = new List<Hotel>()
             {
