@@ -1,11 +1,12 @@
 import React from 'react'
 import { NUMBER_TYPES } from '../FilterBar/filterData'
+import NumberDatePicker from './NumberDatePicker'
 
-export default function NumberView({ image, numType, numberCost, available }) {
+export default function NumberView({ image, numType, numberCost, available, id, bookingNumber }) {
 
 
   return (
-    <div className='py-3 pt-3 border-bottom'>
+    <div className='py-3 pt-3 col-4 border-bottom'>
       <div className='pb-2'>
         <img alt='' src={image} className='rounded img-thumbnail' />
       </div>
@@ -13,11 +14,9 @@ export default function NumberView({ image, numType, numberCost, available }) {
       <p>Cost: {numberCost}</p>
       {available ?
         (<>
-          <p className='text-success'>Available</p>
-          <button>Order</button>
+          <NumberDatePicker id={id} bookingNumber={bookingNumber}/>
         </>
         ) :
-
         (<p className='text-danger'>Not Available</p>)
       }
 

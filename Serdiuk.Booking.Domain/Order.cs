@@ -12,6 +12,9 @@ namespace Serdiuk.Booking.Domain
             if (dateEnd <= dateStart)
                 throw new ArgumentException("Дата выезда не может быть меньше даты заезда");
 
+            if (dateStart <= DateTime.Today.AddHours(4))
+                throw new ArgumentException("Дата въезда менее или равна сегоднешней дате");
+
             UserId = userId;
             NumberId = numberId;
             NumberCost = numberCost;

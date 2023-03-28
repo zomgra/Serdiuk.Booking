@@ -8,7 +8,7 @@ namespace Serdiuk.Booking.Application.Numbers.GetAvailableByHotelId
     /// <summary>
     /// Запрос на показ всех свободных номеров по идентификатору отеля
     /// </summary>
-    public class GetAvailableNumbersByHotelIdQuery : IRequest<Result<IEnumerable<HotelNumber>>>
+    public class GetNumbersByHotelIdQuery : IRequest<Result<IEnumerable<HotelNumber>>>
     {
         /// <summary>
         /// Идентификатор отеля

@@ -39,6 +39,7 @@ internal class Configuration
                 "http://localhost:3000/signout-oidc"
             },
             AllowAccessTokensViaBrowser = true,
+            AllowOfflineAccess = true,
         };
     }
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Serdiuk.Booking.Api.Controllers.Dtos.Order;
 using Serdiuk.Booking.Application.Orders.CancelOrder;
+using Serdiuk.Booking.Application.Orders.GetOrdersByUserId;
 
 namespace Serdiuk.Booking.Api.Controllers
 {
@@ -10,6 +11,21 @@ namespace Serdiuk.Booking.Api.Controllers
     [Authorize]
     public class OrderController : BaseControllerApi
     {
+        [HttpGet]
+        public async Task<IActionResult> GetOrdersByUserId()
+        {
+            var query = new GetOrdersByUserIdQuery() { UserId = UserId };
+            var result = await Mediator.Send(query);
+
+            if (result.IsFailed)
+                return BadRequest(result.Reasons);
+            return Ok(result.Value);
+        }
+        /// <summary>
+        /// Отменить заказ
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<IActionResult> CancelOrderAsync([FromQuery] CancelOrderCommandDto dto)
         {
@@ -21,5 +37,6 @@ namespace Serdiuk.Booking.Api.Controllers
             
             return Ok();
         }
+        
     }
 }

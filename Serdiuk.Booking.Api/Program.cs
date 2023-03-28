@@ -7,21 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddCors(c =>
+builder.Services.AddResponseCaching();
+builder.Services.AddCors(o =>
 {
-    c.AddDefaultPolicy(b =>
+    o.AddDefaultPolicy(p =>
     {
-        b.AllowAnyMethod()
-        .AllowAnyHeader()
-        .WithOrigins("http://localhost:3000");
+        p.AllowAnyHeader()
+        .AllowAnyMethod()
+        .WithOrigins("http://localhost:3000")
+        .AllowCredentials();
     });
 });
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
     {
@@ -29,14 +25,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateAudience = false
         };
+        // URL of our identity server
         options.Authority = "https://localhost:10001";
-
         options.RequireHttpsMetadata = false;
         options.Audience = "BookingApi";
     });
 
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -47,10 +49,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseResponseCaching();
 
 app.MapControllers();
 

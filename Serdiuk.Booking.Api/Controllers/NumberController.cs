@@ -11,7 +11,7 @@ namespace Serdiuk.Booking.Api.Controllers
     /// Контроллер по работе с номерами отеля
     /// </summary>
     [ApiController]
-    //[Authorize]
+    [Authorize]
     [Route("api/v1/hotel/numbers")]
     public class NumberController : BaseControllerApi
     {
@@ -21,7 +21,7 @@ namespace Serdiuk.Booking.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> GetAvailableNumberByHotelId([FromQuery] GetAvailableNumbersByHotelIdQuery query)
+        public async Task<IActionResult> GetNumberByHotelId([FromQuery] GetNumbersByHotelIdQuery query)
         {
             var result = await Mediator.Send(query);
 
