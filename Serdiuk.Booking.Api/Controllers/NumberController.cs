@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serdiuk.Booking.Api.Controllers.Dtos.Number;
 using Serdiuk.Booking.Application.Numbers.BookingNumber;
@@ -12,7 +11,7 @@ namespace Serdiuk.Booking.Api.Controllers
     /// Контроллер по работе с номерами отеля
     /// </summary>
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Route("api/v1/hotel/numbers")]
     public class NumberController : BaseControllerApi
     {
@@ -21,6 +20,7 @@ namespace Serdiuk.Booking.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAvailableNumberByHotelId([FromQuery] GetAvailableNumbersByHotelIdQuery query)
         {
             var result = await Mediator.Send(query);

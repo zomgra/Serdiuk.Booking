@@ -26,18 +26,5 @@ namespace Serdiuk.Booking.Api.Controllers
 
             return Ok(result.Value);
         }
-        /// <summary>
-        /// Получить все отели
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAllHotels()
-        {
-            var result = await Mediator.Send(new GetAllHotelQuery());
-            if (result.IsFailed)
-                return BadRequest(result.Reasons);
-
-            return Ok(result.Value);
-        }
     }
 }

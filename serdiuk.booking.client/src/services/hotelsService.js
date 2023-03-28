@@ -12,3 +12,11 @@ export async function getHotelsByFilter(data) {
     })
     return (responce.data);
 }
+export async function getNumberByHotelId(id) {
+    console.log(id);
+    var responce = await instance.get("/hotel/numbers", {
+        params: {HotelId:id},
+        method: "GET"
+    })
+    return responce.data;
+}

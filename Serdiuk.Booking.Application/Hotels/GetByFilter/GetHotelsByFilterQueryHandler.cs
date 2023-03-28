@@ -7,7 +7,7 @@ using Serdiuk.Booking.Application.Common.Extension;
 using Serdiuk.Booking.Domain;
 using Serdiuk.Booking.Domain.Dto;
 using Serdiuk.Booking.Infrastructure.Interfaces;
-
+using System.Transactions;
 
 namespace Serdiuk.Booking.Application.Hotels.GetByFilter
 {
@@ -31,11 +31,16 @@ namespace Serdiuk.Booking.Application.Hotels.GetByFilter
                 var results = _mapper.Map<List<HotelInfoDto>>(hotels);
                 return results.ToResult<IEnumerable<HotelInfoDto>>();
             }
-            var entities = hotels.FilterBy(_mapper, request.NumberType, request.MinCost, request.MaxCost);
+             var res = hotels.FilterByMinCost((decimal) request.MinCost)
+                .FilterByMaxCost((decimal)request.MaxCost)
+                .FilterByType((NumberType)request.NumberType);
 
-
-
-            var result = entities.ProjectTo<HotelInfoDto>(_mapper.ConfigurationProvider);
+            
+            var result = new List<HotelInfoDto>();
+            foreach (var item in res.ToList())
+            {
+                result.Add(_mapper.Map<HotelInfoDto>(item));
+            }
 
             return result.ToResult<IEnumerable<HotelInfoDto>>();
         }

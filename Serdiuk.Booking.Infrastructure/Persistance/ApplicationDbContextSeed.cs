@@ -19,9 +19,9 @@ namespace Serdiuk.Booking.Infrastructure.Persistance
                 };
             var hotels = new List<Hotel>()
             {
-                new Hotel("Hotel-Super", "https://www.ahstatic.com/photos/1276_ho_00_p_1024x768.jpg", "New-York Str. 3") {HotelNumbers = new List<HotelNumber>(){numbers[0],numbers[3], numbers[4] } },
+                new Hotel("Hotel-Super",  "New-York Str. 3", "https://www.ahstatic.com/photos/1276_ho_00_p_1024x768.jpg") {HotelNumbers = new List<HotelNumber>(){numbers[0],numbers[3], numbers[4] } },
                // new Hotel{Name = "Hotel-Super", Street = "New-York Str. 3", HotelNumbers = new List<HotelNumber>(){numbers[0],numbers[3], numbers[4] } },
-                new Hotel( "Econom-Hotel", "https://www.h-hotels.com/_Resources/Persistent/0/1/a/4/01a400d0047f4b7599631797fc27ceabf9e68db3/aussenansicht-nacht-03-h4-hotel-berlin-alexanderplatz-2400x1113.jpg",  "Haharina Str.4"){HotelNumbers =  new List<HotelNumber>(){numbers[1], numbers[2],numbers[5] } },
+                new Hotel( "Econom-Hotel", "Haharina Str.4", "https://www.h-hotels.com/_Resources/Persistent/0/1/a/4/01a400d0047f4b7599631797fc27ceabf9e68db3/aussenansicht-nacht-03-h4-hotel-berlin-alexanderplatz-2400x1113.jpg"){HotelNumbers =  new List<HotelNumber>(){numbers[1], numbers[2],numbers[5] } },
             };
             if (!context.Hotels.Any() && !context.HotelNumbers.Any())
             {

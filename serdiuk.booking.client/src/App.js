@@ -1,8 +1,11 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import FilterBar from './components/FilterBar/FilterBar';
 import { useEffect, useState } from 'react';
 import { getHotelsByFilter } from './services/hotelsService';
+import HotelList from './components/Hotel/HotelList';
+import { Route, Routes } from 'react-router-dom';
+import HotelPage from './components/Hotel/HotelPage';
+
 
 function App() {
 
@@ -25,8 +28,6 @@ function App() {
     }
     else {
       var currentData = {
-        minCost: 0,
-        maxCost : 0,
       }
     }
     
@@ -37,8 +38,17 @@ function App() {
 
 
   return (
-   <div>
-    <FilterBar loadData={loadHotelsByFilter}/>
+   <div className='row d-flex'>
+    <Routes>
+      <Route path='/' element=
+      {
+        <>
+        <FilterBar loadData={loadHotelsByFilter}/>
+        <HotelList hotels={hotels}/>
+        </>
+      }></Route>
+      <Route path='/hotel/:id' element={<HotelPage/>}></Route>
+    </Routes>
    </div>
   );
 }

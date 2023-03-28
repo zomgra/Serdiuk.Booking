@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 using Serdiuk.Booking.Domain;
+using System.Text.Json.Serialization;
 
 namespace Serdiuk.Booking.Application.Numbers.GetAvailableByHotelId
 {
@@ -12,6 +13,7 @@ namespace Serdiuk.Booking.Application.Numbers.GetAvailableByHotelId
         /// <summary>
         /// Идентификатор отеля
         /// </summary>
+        [JsonPropertyName("id")]
         public int HotelId { get; set; }
     }
 }

@@ -24,7 +24,12 @@
         /// <summary>
         /// Количесто номеров
         /// </summary>
-        public int NumbersCount { get; init; }
+        public int NumbersCount
+        { get
+            {
+                return HotelNumbers.Count();
+            }
+        }
         /// <summary>
         /// Количество свободных номеров
         /// </summary>
@@ -70,7 +75,6 @@
             Name = name;
             Street = street;
             Image = image;
-            NumbersCount = numbersCount;
             // HotelNumbers = hotelNumbers;
         }
     }

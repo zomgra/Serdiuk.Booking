@@ -1,32 +1,20 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Serdiuk.Booking.Domain;
-using Serdiuk.Booking.Domain.Dto;
+﻿using Serdiuk.Booking.Domain;
 
 namespace Serdiuk.Booking.Application.Common.Extension
 {
     public static class HotelExtensions
     {
-        
-        public static IQueryable<Hotel> FilterBy(this IQueryable<Hotel> hotels, IMapper mapper,
-                                                        NumberType? numberType = null, decimal?
-                                                        minCost = null, decimal? maxCost = null)
+        public static IQueryable<Hotel> FilterByType(this IQueryable<Hotel> hotels, NumberType type)
         {
-            var result = hotels;
-            if (numberType.HasValue)
-            {
-                result = result.Where(hotel => hotel.HotelNumbers.Any(n => n.Type == numberType));
-            }
-            if (minCost.HasValue)
-            {
-                result = result.Where(h=>h.HotelNumbers.Any(n=>n.NumberCost >= minCost));
-            }
-            if (maxCost.HasValue)
-            {
-                result = result.Where(h => h.HotelNumbers.Any(n => n.NumberCost <= maxCost));
-            }
-            return result;
+            return hotels.Where(hotel => hotel.HotelNumbers.Any(n => n.Type == type));
         }
-
+        public static IQueryable<Hotel> FilterByMinCost(this IQueryable<Hotel> hotels, decimal cost)
+        {
+            return hotels = hotels.Where(h => h.HotelNumbers.Any(n => n.NumberCost >= cost));
+        }
+        public static IQueryable<Hotel> FilterByMaxCost(this IQueryable<Hotel> hotels, decimal cost)
+        {
+            return hotels = hotels.Where(h => h.HotelNumbers.Any(n => n.NumberCost <= cost));
+        }
     }
 }

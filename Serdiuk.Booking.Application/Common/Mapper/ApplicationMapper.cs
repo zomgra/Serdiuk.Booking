@@ -10,7 +10,6 @@ namespace Serdiuk.Booking.Application.Common.Mapper
         {
             CreateMap<Hotel, HotelInfoDto>()
                 .ForMember(h => h.Id, c => c.MapFrom(d => d.Id))
-                .ForMember(h => h.CanOrderNumber, c => c.MapFrom(d => d.CanOrderNumber))
                 .ForMember(h => h.AvailableRooms, c => c.MapFrom(d => d.AvailableRooms))
                 .ForMember(h => h.Image, c => c.MapFrom(d => d.Image))
                 .ForMember(h => h.Name, c => c.MapFrom(d => d.Name))
