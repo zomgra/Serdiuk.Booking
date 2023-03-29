@@ -40,11 +40,31 @@ export async function bookingNumberHandler(data) {
     return responce.data;
 }
 export async function getUserOrders() {
-    console.log(await getToken());
     var responce = await instance.get('/hotel/orders', {
             headers:{
                 'Authorization': await getToken(),
             }
+    })
+    return responce.data;
+}
+export async function payOrderHandler(id){
+    var data = {orderId:id};
+    console.log(JSON.stringify(data));
+    var responce = await instance.put('/hotel/orders/pay', JSON.stringify(data), {
+        headers:{
+            'Authorization': await getToken(),
+            'Content-Type': 'application/json',
+        }
+    })
+    return responce.data;
+}
+export async function cancelOrderHandler(id){
+    console.log(JSON.stringify({orderId:id}));
+    var responce = await instance.put('/hotel/orders', JSON.stringify({orderId:id}), {
+        headers:{
+            'Authorization': await getToken(),
+            'Content-Type': 'application/json',
+        }
     })
     console.log(responce);
     return responce.data;

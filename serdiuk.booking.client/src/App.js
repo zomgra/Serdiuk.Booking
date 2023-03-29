@@ -47,10 +47,9 @@ function App() {
     await setHotels(selectedHotels);
   }
   async function bookingNumber(data) {
-
-    console.log(data);
     var result = await bookingNumberHandler(data);
-    console.log(result);
+    if(result.status === 200)
+    window.location.href='/orders';
   }
 
 

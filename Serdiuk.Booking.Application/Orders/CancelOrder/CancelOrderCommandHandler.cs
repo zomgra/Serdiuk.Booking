@@ -25,6 +25,8 @@ namespace Serdiuk.Booking.Application.Orders.CancelOrder
                 return Result.Fail("Произошла ошибка, у вас недостаточно прав, повторите попытку");
             var closeResult = order.TryCloseOrder();
 
+            await _context.SaveChangesAsync(cancellationToken);
+
             return closeResult;
         }
     }

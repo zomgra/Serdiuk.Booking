@@ -46,20 +46,6 @@ namespace Serdiuk.Booking.Api.Controllers
 
             return Ok(result.Value);
         }
-        /// <summary>
-        /// Оплатить заказ номера
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <param name="cancellationToken"></param>
-        [HttpPut]
-        public async Task<IActionResult> PayForNumber([FromQuery] PayNumberCommandDto dto, CancellationToken cancellationToken)
-        {
-            var command = new PayNumberCommand { NumberId = dto.NumberId, UserId = UserId };
-            var result = await Mediator.Send(command, cancellationToken);
-            if (result.IsFailed)
-                return BadRequest(result.Reasons);
-
-            return Ok();
-        }
+       
     }
 }

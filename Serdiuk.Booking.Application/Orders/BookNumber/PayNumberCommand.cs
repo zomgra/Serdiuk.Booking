@@ -15,9 +15,9 @@ namespace Serdiuk.Booking.Application.Numbers.BookNumber
         [JsonPropertyName("userId")]
         public Guid UserId { get; set; }
         /// <summary>
-        /// Идентификатор номера
+        /// Идентификатор отеля
         /// </summary>
-        [JsonPropertyName("numberId")]
-        public int NumberId { get; set; }
+        [JsonPropertyName("orderId")]
+        public int OrderId { get; set; }
     }
 }

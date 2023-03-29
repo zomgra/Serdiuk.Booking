@@ -16,12 +16,12 @@ namespace Serdiuk.Booking.Application.Numbers.BookNumber
 
         public async Task<Result> Handle(PayNumberCommand request, CancellationToken cancellationToken)
         {
-            var number = await _context.HotelNumbers.FirstOrDefaultAsync(n => n.NumberId == request.NumberId, cancellationToken);
+            var order = await _context.Orders.FirstOrDefaultAsync(n => n.OrderId == request.OrderId, cancellationToken);
 
-            if (number == null)
+            if (order == null)
                 return Result.Fail("Произошла ошибка, повторите позже");
 
-            var payedResult = number.BookRoom();
+            var payedResult = order.PayOrder();
 
             await _context.SaveChangesAsync(cancellationToken);
 

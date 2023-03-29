@@ -68,13 +68,5 @@ namespace Serdiuk.Booking.Domain
                 return Result.Fail(e.Message);
             }
         }
-        public Result BookRoom()
-        {
-            if (IsAvailable)
-                return Result.Fail("Произошла ошибка, номер не заказан");
-
-            IsPopulated = true;
-            return Result.Ok();
-        }
     }
 }

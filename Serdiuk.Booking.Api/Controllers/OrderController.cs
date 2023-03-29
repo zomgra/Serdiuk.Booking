@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serdiuk.Booking.Api.Controllers.Dtos.Order;
+using Serdiuk.Booking.Application.Numbers.BookNumber;
 using Serdiuk.Booking.Application.Orders.CancelOrder;
 using Serdiuk.Booking.Application.Orders.GetOrdersByUserId;
 
@@ -27,7 +28,7 @@ namespace Serdiuk.Booking.Api.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> CancelOrderAsync([FromQuery] CancelOrderCommandDto dto)
+        public async Task<IActionResult> CancelOrderAsync(CancelOrderCommandDto dto)
         {
             var command = new CancelOrderCommand() { OrderId = dto.OrderId, UserId = UserId};
             var result = await Mediator.Send(command);
@@ -37,6 +38,20 @@ namespace Serdiuk.Booking.Api.Controllers
             
             return Ok();
         }
-        
+        /// <summary>
+        /// Оплатить заказ номера
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="cancellationToken"></param>
+        [HttpPut("pay")]
+        public async Task<IActionResult> PayForOrder(PayNumberCommandDto dto, CancellationToken cancellationToken)
+        {
+            var command = new PayNumberCommand { OrderId = dto.OrderId, UserId = UserId };
+            var result = await Mediator.Send(command, cancellationToken);
+            if (result.IsFailed)
+                return BadRequest(result.Reasons);
+
+            return Ok();
+        }
     }
 }
