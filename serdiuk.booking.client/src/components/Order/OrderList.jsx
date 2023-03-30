@@ -23,7 +23,8 @@ export default function OrderList() {
     }
 
     return (
-        <div>
+        <div className=''>
+            <button onClick={()=>{window.location.href='/'}} className='btn btn-primary m-4'>К отелям</button>
             {orders.map((order) => <OrderView key={order.orderId} order={order}/>)}
         </div>
     )

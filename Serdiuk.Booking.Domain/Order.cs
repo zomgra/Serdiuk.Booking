@@ -108,10 +108,15 @@ namespace Serdiuk.Booking.Domain
         /// Закрыть заказ
         /// </summary>
         /// <returns>Если заказ оплачен, отменен или закончен - вернет Fail</returns>
-        public Result TryCloseOrder()
+        public Result TryCloseOrder(HotelNumber number)
         {
             if (Status != OrderStatus.Open)
                 return Result.Fail("Не возможно закрыть заказ, или произошла ошибка");
+
+            var res = number.OpenNumber();
+
+            if (res.IsFailed)
+                return res;
 
             IsClosed = true;
             return Result.Ok();

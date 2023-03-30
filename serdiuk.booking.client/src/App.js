@@ -52,9 +52,8 @@ function App() {
     window.location.href='/orders';
   }
 
-
   return (
-    <div className='row d-flex'>
+    <div className='row '>
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route element={<Home  user={user} loadHotelsByFilter={loadHotelsByFilter} hotels={hotels}/>} path="/"></Route>

@@ -18,6 +18,10 @@
         /// </summary>
         public string Street { get; init; }
         /// <summary>
+        /// Детали отеля
+        /// </summary>
+        public string Details { get; set; }
+        /// <summary>
         /// Картинка отеля
         /// </summary>
         public string Image { get; init; }
@@ -61,21 +65,14 @@
         /// </summary>
         /// <param name="name">Название отеля</param>
         /// <param name="street">Улица отеля</param>
-        /// <param name="numbers">Номера отеля</param>
-        public Hotel(string name, string street, string image)//, ICollection<HotelNumber> hotelNumbers)
+        /// <param name="details">Детали отеля</param>
+        public Hotel(string name, string street, string image, string details)
         {
             Name = name;
             Image = image;
             Street = street;
             HotelNumbers = new List<HotelNumber>();
-        }
-
-        public Hotel(string name, string street, string image, int numbersCount)//, ICollection<HotelNumber> hotelNumbers)
-        {
-            Name = name;
-            Street = street;
-            Image = image;
-            // HotelNumbers = hotelNumbers;
+            Details = details;
         }
     }
 }

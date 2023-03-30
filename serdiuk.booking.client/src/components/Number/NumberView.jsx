@@ -2,7 +2,7 @@ import React from 'react'
 import { NUMBER_TYPES } from '../FilterBar/filterData'
 import NumberDatePicker from './NumberDatePicker'
 
-export default function NumberView({ image, numType, numberCost, available, id, bookingNumber }) {
+export default function NumberView({ image, numType, numberCost, available, details, id, bookingNumber }) {
 
 
   return (

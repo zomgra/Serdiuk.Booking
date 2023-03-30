@@ -19,6 +19,10 @@
         /// </summary>
         public string Image { get; init; }
         /// <summary>
+        /// Детали отеля
+        /// </summary>
+        public string Details { get; init; }
+        /// <summary>
         /// Количесто номеров
         /// </summary>
         public int NumbersCount { get; init; }

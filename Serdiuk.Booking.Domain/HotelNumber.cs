@@ -68,5 +68,13 @@ namespace Serdiuk.Booking.Domain
                 return Result.Fail(e.Message);
             }
         }
+        public Result OpenNumber()
+        {
+            if (IsAvailable)
+                return Result.Fail("Номер уже открыт");
+            IsAvailable = true;
+
+            return Result.Ok();
+        }
     }
 }

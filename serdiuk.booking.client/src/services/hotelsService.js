@@ -37,7 +37,7 @@ export async function bookingNumberHandler(data) {
         },
     })
     console.log(responce);
-    return responce.data;
+    return responce;
 }
 export async function getUserOrders() {
     var responce = await instance.get('/hotel/orders', {

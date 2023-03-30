@@ -23,7 +23,12 @@ namespace Serdiuk.Booking.Application.Orders.CancelOrder
 
             if (order.UserId != request.UserId)
                 return Result.Fail("Произошла ошибка, у вас недостаточно прав, повторите попытку");
-            var closeResult = order.TryCloseOrder();
+            var number = await _context.HotelNumbers.FirstOrDefaultAsync(n=>n.NumberId == order.NumberId);
+
+            if (number == null)
+                return Result.Fail("Произошла ошибка, заказ не найден, повторите попытку");
+
+            var closeResult = order.TryCloseOrder(number);
 
             await _context.SaveChangesAsync(cancellationToken);
 

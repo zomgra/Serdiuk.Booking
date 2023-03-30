@@ -16,8 +16,8 @@ export default function OrderView({ order }) {
         if (status === 0)
             return (
                 <div>
-                    <button onClick={()=>payOrder(id)} className='btn btn-success'>Payed</button>
-                    <button onClick={()=>cancelOrder(id)} className='btn btn-danger'>Cancel</button>
+                    <button onClick={()=>payOrder(id)} className='btn btn-success m-1'>Payed</button>
+                    <button onClick={()=>cancelOrder(id)} className='btn btn-danger m-1'>Cancel</button>
                 </div>)
         else if (order.status === 1)
             return (
@@ -40,12 +40,14 @@ export default function OrderView({ order }) {
     }
 
     return (
-        <div>
-            <h4>{order.orderId}</h4>
-            <h4>{order.costOrder}</h4>
-            <h4>Дата вьезда {order.dateStart}</h4>
-            <h4>Количевство дней {order.dayCount}</h4>
-            {getDetailButton(order.status, order.orderId)}
+        <div className='row col-3 border m-2 d-inline-flex'>
+            <div className='col-md-8 offset-md-2'>
+                <h4>{order.orderId}</h4>
+                <h4>{order.costOrder}</h4>
+                <h4>Дата вьезда {order.dateStart}</h4>
+                <h4>Количевство дней {order.dayCount}</h4>
+                {getDetailButton(order.status, order.orderId)}
+            </div>
         </div>
     )
 }
